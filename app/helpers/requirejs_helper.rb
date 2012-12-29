@@ -11,7 +11,7 @@ module RequirejsHelper
     {}.tap do |data|
       if name
         name += ".js" unless name =~ /\.js$/
-        data['main'] = _javascript_path(name).sub(/\.js$/,'')
+        data['main'] = File.basename(_javascript_path(name).sub(/\.js$/,''))
       end
 
       data.merge!(yield controller) if block_given?
@@ -86,7 +86,7 @@ module RequirejsHelper
     if defined?(javascript_path)
       javascript_path(name)
     else
-      "/assets/#{name}.js"
+      "/assets/#{name}"
     end
   end
 end
